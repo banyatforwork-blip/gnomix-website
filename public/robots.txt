@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /download
+Allow: /faq
+Allow: /community
+
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.cache/
+
+Sitemap: https://www.gnomix.linkpc.net/sitemap.xml
+
+# Crawl delay in seconds
+Crawl-delay: 1
