@@ -1,0 +1,177 @@
+GNOME
+
+KDE Plasma
+
+Xfce
+
+LXDE
+
+LXQt
+
+Cinnamon
+
+MATE
+
+Budgie
+
+COSMIC (System76)
+
+Pantheon
+
+Deepin DE (DDE)
+
+UKUI
+
+Trinity Desktop Environment (TDE)
+
+Enlightenment (E / Moksha)
+
+Moksha Desktop
+
+Lumina
+
+CDE (Common Desktop Environment)
+
+ROX Desktop
+
+FVWM-Crystal
+
+IceWM Session (DE variant)
+
+JWM Desktop variant
+
+Openbox-based DEs (CrunchBang-style, BunsenLabs)
+
+pekwm session DE variant
+
+Window Maker (GNUstep WM “DE-ish”)
+
+AfterStep
+
+Equinox Desktop Environment (EDE)
+
+Razor-qt (merged into LXQt, but still counts)
+
+Sugar (OLPC)
+
+Unity (original Canonical version)
+
+UnityX / Ubuntu Unity remix DE
+
+Aero-Desktop (very niche)
+
+CuteFish Desktop
+
+Hawaii Shell
+
+Maynard (Pi DE, Wayland)
+
+Papyros Shell (Wayland, defunct)
+
+Liri Shell
+
+GDE2 (GNOME2 fork; rare)
+
+Emerald Desktop (old compiz-based experiments)
+
+Metacity session DE variant
+
+GNOME Flashback
+
+GNOME Classic
+
+KDE 3.x (old, historical)
+
+KDE Trinity (KDE3 continuation; listed separately above but keeping both)
+
+DDE Kylin variant
+
+Nitrux NX Desktop (based on KDE Plasma but considered its own DE)
+
+XFWM4 session DE variant
+
+Enlightenment E16, E17, E18, E19, E21, E25 (distinct generations)
+
+MeX Desktop (project-specific DE)
+
+Jade Desktop (Manjaro project shell)
+
+Draco Desktop (for Slackware)
+
+Pantheon Gala session variant
+
+Pearl Desktop (various DE blends)
+
+XDE (Openbox/Xfce hybrid environment)
+
+GNOME Shell Extensions environments (Pop Shell etc., considered DE-like)
+
+Regolith Desktop (i3 + GNOME)
+
+PaperWM Session (tiling GNOME variant)
+
+HyprDE (from Hyprland projects; early)
+
+Niri Shell (experimental Wayland DE)
+
+riverDE variants (experimental tiling DE shells)
+
+Wayfire shell session (WF-DE)
+
+SwayFX DE session
+
+dwl-based DE shells (dwl-DE wrappers)
+
+qtile-DE sessions
+
+Herbstluftwm DE sessions
+
+spectrwm DE sessions
+
+Deepin Community forks (Unofficial DDE variants)
+
+Kanimoos DE (tiny DE)
+
+DragonFly Desktop (project-linked DE-like environment)
+
+KWinFT Desktop Shell (rare)
+
+Marble Desktop (historical)
+
+Étoilé (GNUstep DE)
+
+GNUStep Desktop
+
+GNU Lumina forks
+
+Aylur’s Gtk Shell (AGS-based desktop)
+
+Atomshell DE (wayland experiments)
+
+Cosmic Classic (GTK version)
+
+GNOME On X (GOX)
+
+xPUD (tiny DE)
+
+Slingshot Shell experiments
+
+AVLinux Openbox DE preset
+
+OpenGEU (Enlightenment-GNOME hybrid)
+
+LXDE-Qt vanilla session (pre-LXQt)
+
+Zorin Desktop (Gnome-based but distinct)
+
+ChromeOS-like DE clones (various small projects)
+
+Magpie Desktop
+
+BigLinux DE Remix
+
+Spiral DE
+
+Kera Desktop
+
+Future-DE / WayShell prototypes (rare)

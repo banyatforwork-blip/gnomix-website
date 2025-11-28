@@ -1,0 +1,227 @@
+To-Do List
+Tasks sorted by priority
+
+To-Do
+
+Importance
+
+Action
+Add a H1 heading to this page.
+Error
+
+More details
+Use good headings on the page.
+Error
+
+More details
+This page has only very few internal links. If it's a welcome page, consider removing it.
+Error
+
+More details
+Remove duplicate or additional meta description tags!
+Error
+
+More details
+Review and improve the page title.
+Warning
+
+More details
+Improve the text of the meta description.
+Warning
+
+More details
+The page title should be better suited to the content of the page.
+Warning
+
+More details
+Improve the page response time.
+Tip
+
+Go to tip
+Checks
+Meta data
+59%
+Title
+
+Warning
+2/3
+Very important
+Gnomix - Choose Your Desktop Environment | Pure GNOME, KDE, XFCE, Cinnamon, MATE for Ubuntu
+The page title should be shorter than 580 pixels. It is 929 pixels long. Optimize title
+There are no duplicate words in the title.
+Meta description
+
+Errors
+1/3
+Very important
+Gnomix transforms Ubuntu into pure, vanilla desktop environments - GNOME, KDE Plasma, XFCE, Cinnamon, or MATE. No bloat, no Snap, no telemetry. Choose your desktop, keep your freedom. Download the beta today.
+There are more than one meta descriptions on the page. Only one is allowed.
+The meta description is too long: 1371 pixels from max. 1000 pixels.
+Crawlability
+
+1/1
+Very important
+There are no problems in accessing the page.
+Canonical link
+
+2/2
+Important
+https://www.gnomix.linkpc.net/
+There is a valid canonical link specified.
+Language
+
+3/3
+Low importance
+Language defined in HTML: en
+Server location: Germany
+The following language is defined in the HTML code: en
+Alternate/hreflang links
+
+1/1
+Low importance
+The specified alternate links have no errors.
+Other meta tags
+
+2/2
+Low importance
+There is no rel=next meta tag on this page.
+There is no rel=prev meta tag on this page.
+Domain
+
+Warning
+1/2
+Low importance
+This page is hosted on a subdomain. Use a top level domain for better SEO results.
+The domain name does not contain any non-Latin characters.
+Page URL
+
+3/3
+Low importance
+No parameters were found in the URL.
+No session ID was found in the URL.
+The URL does not have too many subdirectories.
+Charset encoding
+
+1/1
+Low importance
+The charset encoding (UTF-8) is set correctly.
+Doctype
+
+2/2
+Nice to have
+The doctype HTML 5 is set correctly.
+The doctype is placed first in the HTML code.
+Favicon
+
+1/1
+Nice to have
+The favicon is linked correctly.
+Page quality
+52%
+Content
+
+Errors
+1/4
+Very important
+There are only 0 words on this page. Use at least 250 words to provide useful information
+Some words from the page title are not used within the pages content
+No paragraphs were detected.
+No placeholder texts or images were found.
+Frames
+
+1/1
+Very important
+This page does not use a frameset.
+Mobile optimization
+
+2/2
+Low importance
+A viewport (width=device-width, initial-scale=1.0, maximum-scale=5) is provided.
+One or more Apple Touch icons are specified.
+Strong and bold tags
+
+1/1
+Low importance
+The usage of strong and bold tags is perfect. We recommend the use of up to 6 tags for this page.
+Image SEO
+
+1/1
+Low importance
+ALT text (alternative text) is correctly used on all found images.
+Social media
+
+Warning
+0/1
+Nice to have
+There are few social sharing options on the page. Sharing plugins can increase the page's reach on social media.
+Additional markup
+
+1/1
+Nice to have
+No additional page markup was found.
+HTTPS
+
+2/2
+Low importance
+This page uses HTTPS to protect the privacy and integrity of information exchanged.
+All included files are also transferred via HTTPS.
+Others
+58%
+H1 heading
+
+Errors
+0/1
+Very important
+There is no H1 heading specified.
+Headings
+
+Errors
+0/1
+Important
+There are no headings specified on the page. Headings are important for search engine optimization and help to structure your content.
+Link structure
+0%
+Internal links
+
+Errors
+0/1
+Important
+This page seems to be an entry page, because only very few links were found
+External links
+
+Warning
+0/1
+Nice to have
+There are no external links on this page.
+Server configuration
+69%
+HTTP redirects
+
+1/1
+Very important
+The checked page does not redirect to another URL.
+HTTP header
+
+Warning
+1/2
+Important
+The X-powered header is sent within the response header.
+This page uses compression for data transfer.
+Performance
+
+Warning
+1/2
+Low importance
+The page response time of 0,89 seconds is longer than the recommended limit of 0.4 seconds. A high response time unnecessarily slows down search engine crawling and results in bad user experience as well.
+The file size of the HTML document is fine. (11 kB)
+External factors
+3%
+Backlinks
+
+Warning
+0/4
+Very important
+This page has only a few links from other websites
+This page only has backlinks from 1 referring domains.
+This page only has 1 backlinks.
+This page only has backlinks from 1 different IP addresses
