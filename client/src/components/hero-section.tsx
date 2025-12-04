@@ -104,7 +104,7 @@ export function HeroSection() {
           className="inline-flex items-center gap-2 mb-6 md:mb-8"
         >
           <motion.div
-            className="glass px-4 py-2 rounded-full inline-flex items-center gap-2"
+            className="glass-subtle px-4 py-2 rounded-full inline-flex items-center gap-2 border border-white/20"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -125,6 +125,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-4 md:mb-6"
+          data-testid="heading-gnomix-main"
         >
           <span className="block">Transform Ubuntu</span>
           <span className="block mt-2">
@@ -280,7 +281,7 @@ export function HeroSection() {
                     <div className="w-20 h-20 mx-auto rounded-2xl overflow-hidden">
                       <img 
                         src={gnomixLogo} 
-                        alt="Gnomix Logo" 
+                        alt="Gnomix - Ubuntu customization script for pure desktop environments" 
                         className="w-full object-cover"
                       />
                     </div>

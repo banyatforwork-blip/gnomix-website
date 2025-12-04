@@ -9,12 +9,18 @@ interface Particle {
   speedX: number;
   speedY: number;
   opacity: number;
+  repelThreshold: number;
+  closeDuration: number;
+  stuckDuration: number;
+  isStuck: boolean;
+  isSpecial: boolean;
 }
 
 export function ParticlesBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [particles, setParticles] = useState<Particle[]>([]);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mousePosRef = useRef({ x: -1000, y: -1000 });
+  const isMouseDownRef = useRef(false);
   const animationRef = useRef<number>();
 
   useEffect(() => {
@@ -29,18 +35,118 @@ export function ParticlesBackground() {
       speedX: (Math.random() - 0.5) * 0.3,
       speedY: (Math.random() - 0.5) * 0.3,
       opacity: Math.random() * 0.5 + 0.2,
+      repelThreshold: Math.random() * 60 + 40,
+      closeDuration: 0,
+      stuckDuration: 0,
+      isStuck: false,
+      isSpecial: false,
     }));
 
     setParticles(initialParticles);
 
     const animate = () => {
-      setParticles((prev) =>
-        prev.map((p) => ({
-          ...p,
-          x: ((p.x + p.speedX + 100) % 100),
-          y: ((p.y + p.speedY + 100) % 100),
-        }))
-      );
+      setParticles((prev) => {
+        const updated = prev.map((p) => {
+          let newX = p.x + p.speedX;
+          let newY = p.y + p.speedY;
+
+          // Wrap around edges
+          newX = ((newX + 100) % 100);
+          newY = ((newY + 100) % 100);
+
+          // Mouse interaction
+          const pxPos = (newX * window.innerWidth) / 100;
+          const pyPos = (newY * window.innerHeight) / 100;
+          const dx = mousePosRef.current.x - pxPos;
+          const dy = mousePosRef.current.y - pyPos;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          let closeDuration = p.closeDuration;
+          let stuckDuration = p.stuckDuration;
+          let isStuck = p.isStuck;
+
+          if (distance < 300) {
+            const influence = Math.max(0, 1 - distance / 300);
+            
+            if (isMouseDownRef.current) {
+              // Repel on click
+              const repelForce = influence * 0.8;
+              newX -= (dx / (distance || 1)) * repelForce * 0.15;
+              newY -= (dy / (distance || 1)) * repelForce * 0.15;
+              closeDuration = 0;
+              stuckDuration = 0;
+              isStuck = false;
+            } else if (distance < p.repelThreshold) {
+              // Repel if too close - track duration
+              const repelForce = (1 - distance / p.repelThreshold) * 1.2;
+              newX -= (dx / (distance || 1)) * repelForce * 0.4;
+              newY -= (dy / (distance || 1)) * repelForce * 0.4;
+              closeDuration += 1;
+              if (closeDuration > 60) {
+                isStuck = true;
+              }
+              stuckDuration = 0;
+            } else if (!isStuck) {
+              // Attract strongly to cursor (unless stuck)
+              const baseAttractForce = influence * 1.5;
+              const attractForce = p.isSpecial ? baseAttractForce * 2.5 : baseAttractForce;
+              newX += (dx / (distance || 1)) * attractForce * 0.25;
+              newY += (dy / (distance || 1)) * attractForce * 0.25;
+              closeDuration = 0;
+              stuckDuration = 0;
+            } else {
+              // Particle is stuck - increment stuck duration
+              stuckDuration += 1;
+              if (stuckDuration > 300) {
+                // After 5 seconds of being stuck, reset and allow attraction again
+                isStuck = false;
+                stuckDuration = 0;
+              }
+              closeDuration = 0;
+            }
+          } else {
+            closeDuration = 0;
+          }
+
+          return {
+            ...p,
+            x: newX,
+            y: newY,
+            speedX: p.speedX * 0.95 + (Math.random() - 0.5) * 0.12,
+            speedY: p.speedY * 0.95 + (Math.random() - 0.5) * 0.12,
+            closeDuration,
+            stuckDuration,
+            isStuck,
+          };
+        });
+
+        // Find stuck particles and boost a far away one
+        const stuckParticles = updated.filter((p) => p.isStuck && !p.isSpecial);
+        if (stuckParticles.length > 0) {
+          // Find the farthest particle from mouse
+          const farthest = updated.reduce((max, p) => {
+            const pxPos = (p.x * window.innerWidth) / 100;
+            const pyPos = (p.y * window.innerHeight) / 100;
+            const dx = mousePosRef.current.x - pxPos;
+            const dy = mousePosRef.current.y - pyPos;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            const maxPxPos = (max.x * window.innerWidth) / 100;
+            const maxPyPos = (max.y * window.innerHeight) / 100;
+            const maxDx = mousePosRef.current.x - maxPxPos;
+            const maxDy = mousePosRef.current.y - maxPyPos;
+            const maxDistance = Math.sqrt(maxDx * maxDx + maxDy * maxDy);
+            
+            return distance > maxDistance ? p : max;
+          });
+
+          return updated.map((p) =>
+            p.id === farthest.id ? { ...p, isSpecial: true } : { ...p, isSpecial: false }
+          );
+        }
+
+        return updated;
+      });
       animationRef.current = requestAnimationFrame(animate);
     };
 
@@ -55,31 +161,28 @@ export function ParticlesBackground() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setMousePos({
-          x: ((e.clientX - rect.left) / rect.width) * 100,
-          y: ((e.clientY - rect.top) / rect.height) * 100,
-        });
-      }
+      mousePosRef.current = {
+        x: e.clientX,
+        y: e.clientY,
+      };
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      if (containerRef.current && e.touches.length > 0) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const touch = e.touches[0];
-        setMousePos({
-          x: ((touch.clientX - rect.left) / rect.width) * 100,
-          y: ((touch.clientY - rect.top) / rect.height) * 100,
-        });
-      }
+    const handleMouseDown = () => {
+      isMouseDownRef.current = true;
+    };
+
+    const handleMouseUp = () => {
+      isMouseDownRef.current = false;
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
     };
   }, []);
 
@@ -146,23 +249,35 @@ export function ParticlesBackground() {
 
       {/* Floating particles */}
       <svg className="absolute inset-0 w-full h-full">
+        <defs>
+          <filter id="particleGlow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
         {particles.map((particle) => {
-          const dx = mousePos.x - particle.x;
-          const dy = mousePos.y - particle.y;
+          const pxPos = (particle.x * window.innerWidth) / 100;
+          const pyPos = (particle.y * window.innerHeight) / 100;
+          const dx = mousePosRef.current.x - pxPos;
+          const dy = mousePosRef.current.y - pyPos;
           const distance = Math.sqrt(dx * dx + dy * dy);
-          const influence = Math.max(0, 1 - distance / 20);
-          const offsetX = dx * influence * 0.1;
-          const offsetY = dy * influence * 0.1;
+          const influence = Math.max(0, 1 - distance / 300);
 
           return (
             <circle
               key={particle.id}
-              cx={`${particle.x + offsetX}%`}
-              cy={`${particle.y + offsetY}%`}
+              cx={`${particle.x}%`}
+              cy={`${particle.y}%`}
               r={particle.size}
               fill="currentColor"
               className="text-primary"
-              style={{ opacity: particle.opacity }}
+              filter={influence > 0 ? "url(#particleGlow)" : undefined}
+              style={{
+                opacity: particle.opacity + influence * 0.3,
+              }}
             />
           );
         })}

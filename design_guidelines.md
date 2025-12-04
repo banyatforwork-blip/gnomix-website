@@ -1,7 +1,7 @@
 # Gnomix Linux Website - Design Guidelines
 
 ## Design Approach
-**Glassmorphism-First Design System** inspired by modern tech product sites (Apple, Vercel, Linear) combined with GNOME's clean aesthetic principles. The design emphasizes frosted glass effects, smooth animations, and premium feel while maintaining clarity and usability across all devices.
+**Figma Liquid Glass Design System** - Premium translucent UI using Figma's native liquid glass effect. The design emphasizes true transparency (15-20% opacity), higher blur amounts (20-25px), subtle borders, and liquid shimmer animations. Inspired by Apple's iOS 26 language but with the proper transparent glass aesthetic from Figma's implementation.
 
 ## Typography System
 
@@ -30,13 +30,16 @@
 - Comparison: grid-cols-1 lg:grid-cols-2
 - Gallery: grid-cols-2 md:grid-cols-3 lg:grid-cols-4
 
-## Glassmorphism Components
+## Figma Liquid Glass Components
 
-**Glass Card Base:**
-- backdrop-blur-xl with semi-transparent backgrounds
-- border: border border-white/20
-- Rounded corners: rounded-2xl md:rounded-3xl
-- Shadow: shadow-2xl with subtle glow effects
+**Glass Card Base (True Liquid Glass):**
+- backdrop-blur: 20-25px for pronounced frosting effect
+- Semi-transparent background: rgba(255,255,255,0.15-0.2) dark mode, rgba(255,255,255,0.5-0.6) light mode
+- border: 1px solid with rgba(255,255,255,0.25-0.3) for subtle, refined edge definition
+- Rounded corners: rounded-2xl md:rounded-3xl for smooth, organic curves
+- Shadow: Subtle layered shadows with 0.1-0.2 opacity for depth without heaviness
+- Highlight overlay: Radial gradient shimmer animation that moves smoothly for liquid effect
+- Dynamic liquid movement: Animated radial gradient that rotates and shifts position for organic liquid appearance
 
 **Navigation Bar:**
 - Fixed top position with backdrop-blur-md

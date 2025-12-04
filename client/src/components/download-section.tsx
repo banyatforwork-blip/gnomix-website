@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   Download,
@@ -26,14 +26,66 @@ const requirements = [
   { icon: Monitor, label: "Display", value: "1024x768 resolution or higher" },
 ];
 
+interface GitHubRelease {
+  tag_name: string;
+  published_at: string;
+  assets: Array<{ name: string; size: number; browser_download_url: string }>;
+  body: string;
+  html_url: string;
+}
+
+interface GitHubCommit {
+  commit: {
+    author: {
+      date: string;
+    };
+  };
+}
+
 export function DownloadSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
   const [copied, setCopied] = useState(false);
+  const [githubRelease, setGithubRelease] = useState<GitHubRelease | null>(null);
+  const [latestCommitDate, setLatestCommitDate] = useState<string | null>(null);
+  const [githubLoading, setGithubLoading] = useState(true);
 
   const { data: latestDownload, isLoading } = useQuery<DownloadType>({
     queryKey: ["/api/downloads/latest"],
   });
+
+  useEffect(() => {
+    const fetchGithubData = async () => {
+      try {
+        const [releaseRes, commitRes] = await Promise.all([
+          fetch(
+            "https://api.github.com/repos/gnomixperson/gnomix_script/releases/latest"
+          ),
+          fetch(
+            "https://api.github.com/repos/gnomixperson/gnomix_script/commits?per_page=1"
+          ),
+        ]);
+
+        if (releaseRes.ok) {
+          const releaseData = await releaseRes.json();
+          setGithubRelease(releaseData);
+        }
+
+        if (commitRes.ok) {
+          const commits = await commitRes.json();
+          if (Array.isArray(commits) && commits.length > 0) {
+            setLatestCommitDate(commits[0].commit.author.date);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch GitHub data:", error);
+      } finally {
+        setGithubLoading(false);
+      }
+    };
+
+    fetchGithubData();
+  }, []);
 
   const trackDownload = useMutation({
     mutationFn: async () => {
@@ -49,22 +101,62 @@ export function DownloadSection() {
   };
 
   const copyChecksum = () => {
-    if (latestDownload?.checksum) {
-      navigator.clipboard.writeText(latestDownload.checksum);
+    if (currentRelease.checksum) {
+      navigator.clipboard.writeText(currentRelease.checksum);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
   };
 
-  const currentRelease = latestDownload || {
-    version: "v1.0.0",
-    size: "~2 MB",
-    arch: "All Systems",
-    checksum: "sha256:8f3d2c1b4a5e9f6c7d8e9a0b1c2d3e4f5a6b7c8d9e0a1b2c3d4e5f6a7b8c9d",
-    releaseDate: "November 5, 2025",
-    downloadUrl: "https://github.com/gnomixperson/gnomix_script/releases",
-    githubUrl: "https://github.com/gnomixperson/gnomix_script/",
+  const extractChecksum = (body: string): string => {
+    const checksumMatch = body.match(/sha256[:\s]+([a-f0-9]{64})/i);
+    return checksumMatch ? `sha256:${checksumMatch[1]}` : "sha256: Not available";
   };
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return "0 B";
+    const k = 1024;
+    const sizes = ["B", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round((bytes / Math.pow(k, i)) * 10) / 10 + " " + sizes[i];
+  };
+
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const currentRelease = githubRelease
+    ? {
+        version: githubRelease.tag_name,
+        size:
+          githubRelease.assets.length > 0
+            ? formatFileSize(githubRelease.assets[0].size)
+            : "Unknown",
+        arch: "All Systems",
+        checksum: extractChecksum(githubRelease.body),
+        releaseDate: latestCommitDate
+          ? formatDate(latestCommitDate)
+          : formatDate(githubRelease.published_at),
+        downloadUrl:
+          githubRelease.assets.length > 0
+            ? githubRelease.assets[0].browser_download_url
+            : githubRelease.html_url,
+        githubUrl: githubRelease.html_url,
+      }
+    : latestDownload || {
+        version: "v1.0.0",
+        size: "~2 MB",
+        arch: "All Systems",
+        checksum: "sha256: Not available",
+        releaseDate: "November 5, 2025",
+        downloadUrl: "https://github.com/gnomixperson/gnomix_script/releases",
+        githubUrl: "https://github.com/gnomixperson/gnomix_script/",
+      };
 
   return (
     <section
@@ -94,7 +186,7 @@ export function DownloadSection() {
           </h2>
 
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Run the Gnomix customizer script to instantly transform your Ubuntu system into pure GNOME.
+            Run the Gnomix script to transform your Ubuntu system into your choice of desktop environment - GNOME, KDE Plasma, XFCE, Cinnamon, or MATE.
           </p>
         </motion.div>
 

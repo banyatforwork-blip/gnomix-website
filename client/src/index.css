@@ -65,11 +65,14 @@ html, body {
   --tracking-normal: 0em;
   --spacing: 0.25rem;
   
-  /* Glass effect variables */
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-highlight: rgba(255, 255, 255, 0.1);
-  --glass-shadow: rgba(0, 0, 0, 0.4);
+  /* Figma Liquid Glass Effect Variables */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-bg-strong: rgba(255, 255, 255, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-border-light: rgba(255, 255, 255, 0.3);
+  --glass-highlight: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.2);
+  --glass-shadow-strong: rgba(0, 0, 0, 0.25);
   
   /* Gradient colors */
   --gradient-start: 217 91% 60%;
@@ -93,7 +96,7 @@ html, body {
   --destructive-border: hsl(from hsl(var(--destructive)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
 }
 
-/* Light mode override */
+/* Light mode override - iOS 26 Liquid Glass */
 .light {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
@@ -123,6 +126,15 @@ html, body {
   --secondary-foreground: 220 20% 10%;
   --muted: 220 15% 94%;
   --muted-foreground: 220 10% 45%;
+  
+  /* Light mode liquid glass - more transparent */
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-bg-strong: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.12);
+  --glass-border-light: rgba(0, 0, 0, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.6);
+  --glass-shadow: rgba(0, 0, 0, 0.08);
+  --glass-shadow-strong: rgba(0, 0, 0, 0.12);
   --accent: 217 91% 55%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 55%;
@@ -164,6 +176,18 @@ html, body {
     overflow-x: hidden;
   }
 
+  html {
+    cursor: auto;
+  }
+
+  html.cursor-hidden {
+    cursor: none !important;
+  }
+
+  html.cursor-hidden * {
+    cursor: none !important;
+  }
+
   /* Custom scrollbar for dark theme */
   ::-webkit-scrollbar {
     width: 8px;
@@ -185,59 +209,68 @@ html, body {
 }
 
 @layer components {
-  /* Glassmorphism card */
+  /* Liquid Glass - Clean, Simple, Proven CSS */
   .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    box-shadow: 
-      0 8px 32px var(--glass-shadow),
-      inset 0 1px 0 var(--glass-highlight);
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 25px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 2px solid rgba(255, 255, 255, 0.12);
   }
 
+  /* Liquid Glass - Strong Variant */
   .glass-strong {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 
-      0 8px 32px var(--glass-shadow),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 25px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.18);
+  }
+  
+  /* Navigation - clean glass */
+  nav .glass-strong {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
   }
 
   .light .glass-strong {
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: none;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(6px);
   }
 
-  /* Hide overflow and scrollbars completely on cards */
-  .glass-strong {
-    overflow: hidden;
+  /* Light mode navigation */
+  .light nav .glass-strong {
+    background: rgba(255, 255, 255, 0.7);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
   }
 
+  /* Liquid Glass - Subtle Variant */
   .glass-subtle {
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 25px;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  /* Glass button */
+  /* Liquid Glass - Button Variant */
   .glass-button {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 2px solid rgba(255, 255, 255, 0.15);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   }
 
   /* Gradient text */
@@ -266,7 +299,7 @@ html, body {
     animation: gradientShift 15s ease infinite;
   }
 
-  /* Mesh gradient background */
+  /* Mesh gradient background - Subtle glows only */
   .mesh-gradient {
     position: fixed;
     inset: 0;

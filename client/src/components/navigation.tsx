@@ -32,7 +32,7 @@ export function Navigation() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="fixed top-0 left-0 right-0 z-50 overflow-hidden w-full"
       >
-        <div className="glass-strong rounded-2xl shadow-glass-lg mx-2 mt-4 md:mx-8 lg:mx-16">
+        <div className="rounded-2xl mx-2 mt-4 md:mx-8 lg:mx-16 glass-strong">
           <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-6 lg:px-8">
             <div className="flex items-center justify-between h-14 md:h-20 gap-1 min-w-0">
               {/* Logo */}

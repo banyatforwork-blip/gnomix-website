@@ -76,7 +76,7 @@ export function Footer() {
               <span className="text-xl font-bold gradient-text">Gnomix</span>
             </motion.a>
             <p className="text-sm text-muted-foreground mb-4">
-              Transform Ubuntu into pure GNOME with one command. Clean, fast, minimal.
+              Transform Ubuntu into your ideal desktop. Choose GNOME, KDE, XFCE, Cinnamon, or MATE.
             </p>
 
             {/* Social links */}

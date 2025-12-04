@@ -26,9 +26,9 @@ const features = [
   },
   {
     icon: Palette,
-    title: "Pure GNOME Experience",
+    title: "Your Choice of Desktop",
     description:
-      "Gets you vanilla GNOME without Yaru themes or Canonical customizations. Clean, minimalist, beautiful.",
+      "Pick your perfect desktop environment - GNOME, KDE Plasma, XFCE, Cinnamon, or MATE. Each installed pure and vanilla without modifications.",
     gradient: "from-orange-500 to-red-400",
   },
   {
