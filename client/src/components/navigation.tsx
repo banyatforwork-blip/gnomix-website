@@ -191,7 +191,7 @@ export function Navigation() {
                 <div className="h-px bg-border my-2" />
 
                 <motion.a
-                  href="https://github.com/gubuntu-dev-icebear/Gubuntu"
+                  href="https://github.com/gnomixperson/gnomix_script/"
                   target="_blank"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, x: -20 }}
