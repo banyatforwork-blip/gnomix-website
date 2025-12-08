@@ -11,7 +11,7 @@ const communityLinks = [
     icon: SiDiscord,
     url: "https://discord.gg/RHS3NptNpc",
     gradient: "from-indigo-500 to-purple-500",
-    members: "50~ members",
+    members: "60~ members",
   },
   {
     title: "GitHub",
