@@ -11,4 +11,3 @@ Disallow: /.cache/
 Sitemap: https://gnomixscript.info/sitemap.xml
 
 # Crawl delay in seconds
-Crawl-delay: 1
