@@ -8,7 +8,7 @@ Disallow: /.git/
 Disallow: /node_modules/
 Disallow: /.cache/
 
-Sitemap: https://www.gnomix.linkpc.net/sitemap.xml
+Sitemap: https://gnomixscript.info/sitemap.xml
 
 # Crawl delay in seconds
 Crawl-delay: 1
